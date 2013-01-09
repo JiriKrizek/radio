@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+
+# Installation: Put somewhere into $PATH directory
+# Requires: mplayer
+
+PARAMETER="$1"
+RADIO="$2"
+
+USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1]"
+
+case "$RADIO" in
+  "beat")
+    STREAM="http://www.play.cz/radio/beat128.asx"
+    ;;
+  "r1")
+    STREAM="http://www.bbc.co.uk/radio/listen/live/r1.asx"
+    ;;
+  "r2")
+    STREAM="http://www.bbc.co.uk/radio/listen/live/r2.asx"
+    ;;
+  "r4")
+    STREAM="http://bbc.co.uk/radio/listen/live/r4.asx"
+    ;;
+  "cr1")
+    STREAM="http://www.play.cz/radio/cro1-128.asx"
+    ;;
+  *)
+   if [[ "$PARAMETER" == "start" ]]; then
+     echo $USAGE
+     exit 2
+   fi
+   ;;
+esac
+
+if [[ "$PARAMETER" == "start" ]];then
+  MPLAY_CNT=$(ps ax|grep mplayer|grep -v grep|wc -l)
+  if [[ "MPLAY_CNT" -ne 0 ]]; then killall mplayer; fi
+  mplayer -playlist $STREAM >/dev/null &
+elif [[ "$PARAMETER" == "stop" ]]; then
+  killall mplayer
+else
+  echo $USAGE
+  exit 1
+fi
+
