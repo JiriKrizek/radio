@@ -7,7 +7,7 @@
 PARAMETER="$1"
 RADIO="$2"
 
-USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|soma]"
+USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|soma|somadbs]"
 
 case "$RADIO" in
   "beat")
@@ -27,6 +27,9 @@ case "$RADIO" in
     ;;
   "soma")
     STREAM="http://somafm.com/wma/indiepop.asx"
+    ;;
+  "somadbs")
+    STREAM="http://somafm.com/wma128/dubstep.asx"
     ;;
   *)
    if [[ "$PARAMETER" == "start" ]]; then
