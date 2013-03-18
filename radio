@@ -7,7 +7,7 @@
 PARAMETER="$1"
 RADIO="$2"
 
-USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|soma|somadbs]"
+USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|indie|dnb]"
 
 case "$RADIO" in
   "beat")
@@ -25,10 +25,10 @@ case "$RADIO" in
   "cr1")
     STREAM="http://www.play.cz/radio/cro1-128.asx"
     ;;
-  "soma")
+  "indie"|"soma")
     STREAM="http://somafm.com/wma/indiepop.asx"
     ;;
-  "somadbs")
+  "dnb"|"somadnb")
     STREAM="http://somafm.com/wma128/dubstep.asx"
     ;;
   *)
