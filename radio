@@ -7,7 +7,7 @@
 PARAMETER="$1"
 RADIO="$2"
 
-USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|indie|dnb|groove|space]"
+USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|indie|dnb|groove|space|indie2]"
 
 case "$RADIO" in
   "beat")
@@ -37,6 +37,10 @@ case "$RADIO" in
   "space"|"spacestation")
     STREAM="http://somafm.com/wma128/spacestation.asx"
     ;;
+  "indie2")
+    STREAM="http://64.202.98.133:2120"
+    COMMAND="mplayer $STREAM"
+    ;;
   *)
    if [[ "$PARAMETER" == "start" ]]; then
      echo $USAGE
@@ -45,10 +49,12 @@ case "$RADIO" in
    ;;
 esac
 
+if [[ -z $COMMAND ]]; then COMMAND="mplayer -playlist $STREAM"; fi
+
 if [[ "$PARAMETER" == "start" ]];then
   MPLAY_CNT=$(ps ax|grep mplayer|grep -v grep|wc -l)
   if [[ "MPLAY_CNT" -ne 0 ]]; then killall mplayer; fi
-  mplayer -playlist $STREAM >/dev/null &
+  nohup $COMMAND > /dev/null &
 elif [[ "$PARAMETER" == "stop" ]]; then
   killall mplayer
 else
