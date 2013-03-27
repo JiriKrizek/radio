@@ -7,7 +7,7 @@
 PARAMETER="$1"
 RADIO="$2"
 
-USAGE="Usage: $0 [start|stop] [beat|r1|r2|r4|cr1|indie|dnb|groove|space|indie2]"
+USAGE="Usage: $0 [start|stop] [beat|cr1|dnb|groove|indie|indie2|r1|r2|r4|space]"
 
 case "$RADIO" in
   "beat")
